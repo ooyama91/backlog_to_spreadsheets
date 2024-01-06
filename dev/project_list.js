@@ -21,7 +21,7 @@ function project_list() {
 
     //シート名「ignore」から無視するプロジェクトを取得
     const ss = SpreadsheetApp.getActiveSpreadsheet();
-    const sheet_ignore = ss.getSheetByName('ignore');
+    const sheet_ignore = ss.getSheetByName('00_ignore');
     const ignore_list = sheet_ignore.getRange(2, 1, sheet_ignore.getLastRow()-1, 1).getValues().flat();
     Logger.log(ignore_list);
 
@@ -31,7 +31,9 @@ function project_list() {
 
 
     //結果発表
-    const sheet_project_list = ss.getSheetByName('project_list');
+    const sheet_project_list = ss.getSheetByName('00_project');
 
+    //シートの内容をクリア
+    sheet_project_list.clear();
     sheet_project_list.getRange(1, 1, ary_result_filtered.length, ary_result_filtered[0].length).setValues(ary_result_filtered);
 }
