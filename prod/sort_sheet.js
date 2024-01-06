@@ -1,7 +1,11 @@
 // シートを名前の順に並び替える
-
 function sortSheet() {
-    var sheet = SpreadsheetApp.getActiveSheet();
-    var range = sheet.getRange(1, 1, sheet.getLastRow(), sheet.getLastColumn());
-    range.sort(1);
+    const ss = SpreadsheetApp.getActiveSpreadsheet();
+    const sheets = ss.getSheets();
+    const sheetNames = sheets.map(sheet => sheet.getName());
+    sheetNames.sort();
+    sheetNames.forEach((sheetName, index) => {
+        ss.setActiveSheet(ss.getSheetByName(sheetName));
+        ss.moveActiveSheet(index + 1);
+    });
 }
