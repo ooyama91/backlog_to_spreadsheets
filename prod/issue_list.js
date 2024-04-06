@@ -53,4 +53,34 @@ function issue_list() {
     // issueシートに貼り付け
     sheet_issue.getRange(1, 1, issue_list_array.length, issue_list_array[0].length).setValues(issue_list_array);
 
+    // ------------------------------
+    // D2:Dにステータスによって色を付ける
+    // ------------------------------
+    const range = sheet_issue.getRange('D2:D');
+    const rule = SpreadsheetApp.newConditionalFormatRule()
+        .whenTextEqualTo('未対応')
+        .setBackground('#f29f8d')
+        .setRanges([range])
+        .build();
+    const rules = sheet_issue.getConditionalFormatRules();
+    rules.push(rule);
+    sheet_issue.setConditionalFormatRules(rules);
+
+    const rule2 = SpreadsheetApp.newConditionalFormatRule()
+        .whenTextEqualTo('処理中')
+        .setBackground('#87abff')
+        .setRanges([range])
+        .build();
+    rules.push(rule2);
+    sheet_issue.setConditionalFormatRules(rules);
+
+    const rule3 = SpreadsheetApp.newConditionalFormatRule()
+        .whenTextEqualTo('処理済み')
+        .setBackground('#95edcd')
+        .setRanges([range])
+        .build();
+    rules.push(rule3);
+    sheet_issue.setConditionalFormatRules(rules);
+
+
 }

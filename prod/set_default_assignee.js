@@ -12,7 +12,8 @@ function set_default_assignee() {
     const sheet_todo = ss.getSheetByName('00_not_yet_assign');
 
     // sheet_todoのD2:DからissueKeyを取得
-    const issueKey_list = sheet_todo.getRange(2, 4, sheet_todo.getLastRow()-1, 1).getValues().flat();
+    const lastRow = sheet_todo.getLastRow();
+    const issueKey_list = lastRow > 1 ? sheet_todo.getRange(2, 4, lastRow-1, 1).getValues().flat() : [];
     Logger.log(issueKey_list);
 
     // issueKeyごとに担当者を設定
