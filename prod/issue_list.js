@@ -13,12 +13,17 @@ function issue_list() {
     Logger.log(project_list);
 
     // 1つ目のプロジェクトの課題一覧を取得
+    // &statusId[]=7739 GENOVAの「見積もり依頼」
     let url = `https://${SPACE_KEY}.backlog.jp/api/v2/issues
                     ?apiKey=${API_KEY}
                     &statusId[]=1&statusId[]=2&statusId[]=3&statusId[]=5&statusId[]=6
+                    &statusId[]=7739 
                     &assigneeId[]=${ID_OOYAMA}
                     &count=100
                 `;
+
+    // 
+
     // urlから空白・改行を削除
     url = url.replace(/\s+/g, "");
 
